@@ -12,8 +12,8 @@ const app = express();
 
 // CORS - allow multiple origins (comma-separated in env)
 const allowedOrigins = (process.env.CORS_ORIGIN || 'https://eportal-fze.ae')
-  .split(',')
-  .map(s => s.trim());
+.split(',')
+.map(s => s.trim());
 app.use(cors({
   origin: (origin, cb) => {
     // Allow requests with no origin (server-to-server, Postman, etc.)
@@ -37,18 +37,25 @@ app.use('/api/settings', settingsRoutes);
 // Public PDF route
 app.use('/pdf', publicRoutes);
 
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
+
 // Serve frontend static files in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../public')));
-  app.get('*', (req, res) => {
-    if (!req.path.startsWith('/api') && !req.path.startsWith('/pdf')) {
-      res.sendFile(path.join(__dirname, '../public/index.html'));
-    }
-  });
+  app.get('*', (req, res, next) => {
+  if (
+    req.path === '/health' ||
+    req.path.startsWith('/api') ||
+    req.path.startsWith('/pdf')
+  ) {
+    return next();
+  }
+
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 }
 
 // Health check
-app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 // 404
 app.use((req, res) => res.status(404).json({ error: 'Route not found' }));
