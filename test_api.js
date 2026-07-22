@@ -1,6 +1,6 @@
 async function testApi() {
   // Login to production
-  const res = await fetch('https://qrcodepdfbackend-production.up.railway.app/api/auth/login', {
+  const res = await fetch('https://qrpdf02backend-production.up.railway.app/api/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email: 'admin@example.com', password: 'Admin@123123' })
@@ -14,7 +14,7 @@ async function testApi() {
   const token = data.token;
   
   // Fetch documents from production API
-  const docsRes = await fetch('https://qrcodepdfbackend-production.up.railway.app/api/documents', {
+  const docsRes = await fetch('https://qrpdf02backend-production.up.railway.app/api/documents', {
     headers: { 'Authorization': `Bearer ${token}` }
   });
   

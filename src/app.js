@@ -11,7 +11,7 @@ const settingsRoutes = require('./routes/settings.routes');
 const app = express();
 
 // CORS - allow multiple origins (comma-separated in env)
-const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173')
+const allowedOrigins = (process.env.CORS_ORIGIN || 'https://eportal-fze.ae')
   .split(',')
   .map(s => s.trim());
 app.use(cors({
