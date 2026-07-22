@@ -68,9 +68,9 @@ async function embedQRInPDF(pdfPath, qrImagePath, options = {}) {
   const {
     position = 'custom',
     pageSelection = 'all',
-    customX = 30,
-    customY = 400,
-    qrSize = 50,
+    customX = 487,
+    customY = 57,
+    qrSize = 60,
     outputFilename,
   } = options;
 

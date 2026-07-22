@@ -30,7 +30,7 @@ exports.uploadDocuments = async (req, res) => {
     return res.status(400).json({ error: 'At least one PDF file is required.' });
   }
 
-  const baseUrl = process.env.PUBLIC_APP_URL || 'http://localhost:5000';
+  const baseUrl = process.env.PUBLIC_APP_URL || 'https://eportal-fze.ae';
   const results = [];
 
   for (const file of files) {
